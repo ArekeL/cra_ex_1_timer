@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import SwichButton from "./SwichButton.js";
+import ClearButton from "./ClearButton.js";
 
 class App extends Component {
 	state = {
@@ -8,7 +9,7 @@ class App extends Component {
 		active: false,
 	};
 
-	handleClick = () => {
+	handleSwichButton = () => {
 		if (this.state.active) {
 			clearInterval(this.idInterval);
 		} else {
@@ -28,11 +29,24 @@ class App extends Component {
 		});
 	};
 
+	handleClearButton = () => {
+		clearInterval(this.idInterval);
+
+		this.setState({
+			time: 0,
+			active: false,
+		});
+	};
+
 	render() {
 		return (
 			<>
 				<p>{this.state.time}</p>
-				<SwichButton click={this.handleClick} active={this.state.active} />
+				<SwichButton
+					click={this.handleSwichButton}
+					active={this.state.active}
+				/>
+				<ClearButton click={this.handleClearButton} />
 			</>
 		);
 	}
